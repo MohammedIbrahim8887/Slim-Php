@@ -1,14 +1,11 @@
 <?php
 
 use Slim\App;
+use Zeuxisoo\Whoops\Slim\WhoopsMiddleware;
 return function (App $app) {
     $setting = $app -> getContainer()->get('settings');
 
-    $app->addErrorMiddleware(true,true,true);
-
-    $app->addErrorMiddleware(
-        $setting['displayErrorDetails'],
-        $setting['logErrors'],
-        $setting['logErrorDetails']
+    $app->addMiddleware(
+        new WhoopsMiddleware()
     );
 };
